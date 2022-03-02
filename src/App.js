@@ -1,7 +1,10 @@
+import { Navbar } from "./components/Navbar";
+
+
 const App = () => {
   return (
-    <div className="App">
-      Clean
+    <div className="h-screen w-screen bg-[#F9F9F9]">
+      <Navbar />
     </div>
   );
 }
