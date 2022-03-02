@@ -11,7 +11,7 @@ import logo from "./images/justTheBasicsSmall.png"
 const App = () => {
   return (
     <div>
-      <div className='h-14 w-full bg-white border-b-2 truncate'>
+      <div className='h-14 w-full bg-white border-b-2 truncate sticky top-0'>
         <div className='flex'>
           <Link to="/"><img src={logo} alt="" className='h-14' /></Link>
           <ul className='h-full flex p-2'>
