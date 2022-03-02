@@ -10,9 +10,6 @@ export const List = () => {
   return (
     <>
       <ul>
-        {/* <TodoItem />
-        <TodoItem />
-        <TodoItem /> */}
         {todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
       </ul>
     </>
