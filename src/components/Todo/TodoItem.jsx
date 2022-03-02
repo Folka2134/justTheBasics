@@ -1,7 +1,7 @@
 import React from 'react'
 
-export const TodoItem = () => {
+export const TodoItem = ({ todo }) => {
   return (
-    <li><span>List Item</span><button>x</button></li>
+    <li><span>{todo.todo}</span><button>x</button></li>
   )
 }
