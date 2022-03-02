@@ -1,4 +1,7 @@
 import React from 'react'
+import { Routes, Route, Link } from "react-router-dom";
+
+import App from '../App';
 
 import logo from "../images/justTheBasicsSmall.png"
 
@@ -7,6 +10,10 @@ export const Navbar = () => {
     <>
       <div className='h-14 w-full bg-white border-b-2 truncate'>
         <div className='flex'>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/" element={<Todo />} />
+          </Routes>
           <img src={logo} alt="" className='h-14' />
           <ul className='h-full flex p-2'>
             <li className='p-2 underline'>CRUD-app</li>
