@@ -1,13 +1,20 @@
 import React from 'react'
 
+import { Link } from "react-router-dom";
+
+import crudLogo from "../images/crudLogo.png"
+import gameLogo from "../images/gameLogo.png"
+import weatherLogo from "../images/weatherLogo.png"
+import newsLogo from "../images/newsLogo.png"
+
 export const Home = () => {
   return (
     <div className='h-screen bg-purple-700 grid justify-center content-center'>
-      <div className='h-[500px] w-[400px] grid grid-rows-2 grid-cols-2 border bg-green-2'>
-        <div className='border'>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
+      <div className='h-fit w-[400px] grid grid-rows-2 grid-cols-2 bg-green-2 border-2 rounded-md'>
+        <Link to="/todo"><div className='border'><img src={crudLogo} alt="" /></div></Link>
+        <Link to="/game"><div className='border'><img src={gameLogo} alt="" /></div></Link>
+        <Link to="/weather"><div className='border'><img src={weatherLogo} alt="" /></div></Link>
+        <Link to="/news"><div className='border'><img src={newsLogo} alt="" /></div></Link>
       </div>
     </div>
   )
