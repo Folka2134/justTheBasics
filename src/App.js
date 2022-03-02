@@ -1,9 +1,10 @@
 import { Navbar } from "./components/Navbar";
 
+import logo from "./images/justTheBasicsSmall.png"
 
 const App = () => {
   return (
-    <div className="h-screen w-screen bg-[#F9F9F9]">
+    <div>
       <Navbar />
     </div>
   );
