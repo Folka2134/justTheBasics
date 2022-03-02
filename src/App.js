@@ -22,7 +22,6 @@ const App = () => {
           </ul>
         </div>
       </div>
-      <div className='h-10 w-full grid bg-white border-b-2 justify-center content-center'><p className='text-sm'>Compilation of basic projects displaying a strong foundation.</p></div>
 
       <Routes>
         <Route path="/" element={<Home />} />
