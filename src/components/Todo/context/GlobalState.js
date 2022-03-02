@@ -3,11 +3,7 @@ import React, { createContext, useReducer} from 'react'
 import AppReducer from './AppReducer'
 
 const initialState = {
-  todos: [
-    {id: 1, todo: "First note of the day"},
-    {id: 2, todo: "2nd note of the day"},
-    {id: 3, todo: "3rd note of the day"}
-  ]
+  todos: []
 }
 
 export const GlobalContext = createContext(initialState)
@@ -15,6 +11,12 @@ export const GlobalContext = createContext(initialState)
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
   
+  function addTodo(todo) {
+    dispatch({
+      type: "ADD_TODO",
+      payload: todo
+    })
+  }
   function deleteTodo(id) {
     dispatch({
       type: "DELETE_TODO",
@@ -26,7 +28,8 @@ export const GlobalProvider = ({ children }) => {
     <GlobalContext.Provider
       value={{
         todos: state.todos,
-        deleteTodo
+        deleteTodo,
+        addTodo
       }}
     >
       {children}
