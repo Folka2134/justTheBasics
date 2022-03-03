@@ -5,11 +5,11 @@ import { TodoItem } from "./TodoItem"
 import { GlobalContext } from './context/GlobalState'
 
 export const List = () => {
-  const { todos } = useContext(GlobalContext)
+  const { todos, clearTodo } = useContext(GlobalContext)
 
   return (
     <div className='grid'>
-      <button>clear</button>
+      <button onClick={() => clearTodo()}>clear</button>
       <ul>
         {todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
       </ul>
