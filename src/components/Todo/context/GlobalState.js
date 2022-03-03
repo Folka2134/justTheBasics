@@ -23,13 +23,20 @@ export const GlobalProvider = ({ children }) => {
       payload: id
     })
   }
+  function clearTodo() {
+    dispatch({
+      type: "CLEAR_TODO",
+      payload: []
+    })
+  }
 
   return (
     <GlobalContext.Provider
       value={{
         todos: state.todos,
+        addTodo,
         deleteTodo,
-        addTodo
+        clearTodo
       }}
     >
       {children}
