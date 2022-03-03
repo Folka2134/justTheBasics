@@ -7,11 +7,13 @@ import { GlobalProvider } from './context/GlobalState'
 
 export const Todo = () => {
   return (
-    <div className='h-screen bg-red-800 grid justify-center content-center'>
-      <GlobalProvider>
-        <Input />
-        <List />
-      </GlobalProvider>
+    <div className='h-screen bg-red-800 grid justify-center'>
+      <div className='mt-10'>
+        <GlobalProvider>
+          <Input />
+          <List />
+        </GlobalProvider>
+      </div>
     </div>
   )
 }
