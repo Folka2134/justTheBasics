@@ -10,7 +10,7 @@ export const TodoItem = ({ todo }) => {
     <li className='w-52 flex justify-between'>
       <span>
         <input type="checkbox" value={todo.id} className="m-1" />
-        <label htmlFor={todo.id} className="active:line-through">{todo.todo}</label>
+        <label htmlFor={todo.id} className="">{todo.todo}</label>
       </span>
       <button onClick={() => deleteTodo(todo.id)} className="m-1">x</button>
     </li>
