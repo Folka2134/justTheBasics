@@ -8,7 +8,7 @@ import { GlobalProvider } from './context/GlobalState'
 export const Todo = () => {
   return (
     <div className='h-screen bg-red-800 grid justify-center'>
-      <div className='mt-10'>
+      <div className='mt-16'>
         <GlobalProvider>
           <Input />
           <List />
