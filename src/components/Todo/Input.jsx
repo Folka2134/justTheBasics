@@ -20,7 +20,7 @@ export const Input = () => {
   return (
     <form onSubmit={onSubmit}>
       <input type="text" placeholder='new todo' onChange={(e) => setTodo(e.currentTarget.value)} />
-      <button>+</button>
+      <button className='bg-[#0ECF55] p-2'>+</button>
     </form>
   )
 }
