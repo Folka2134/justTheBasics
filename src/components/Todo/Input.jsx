@@ -14,11 +14,15 @@ export const Input = () => {
       todo
     }
 
-    addTodo(newTodo)
+    if (todo.length > 1) {
+      addTodo(newTodo)
+      e.currentTarget.reset()
+    }
+
   }
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="border-b-2 border-black p-2">
       <input type="text" placeholder='new todo' onChange={(e) => setTodo(e.currentTarget.value)} />
       <button className='bg-[#0ECF55] p-2'>+</button>
     </form>
