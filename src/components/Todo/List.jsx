@@ -9,8 +9,8 @@ export const List = () => {
   const { todos, clearTodo } = useContext(GlobalContext)
 
   return (
-    <div className='grid'>
-      <button onClick={() => clearTodo()} className="hover:bg-[#CF2B23] border-black transition-all duration-200 grid justify-center p-2">
+    <div className='grid justify-center'>
+      <button onClick={() => clearTodo()} className="w-60 hover:bg-[#CF2B23] border-black transition-all duration-200 grid justify-center p-2">
         <RiDeleteBin7Fill size={30} color={"hover:bg-[#CF2B23]"} />
       </button>
       <ul>
