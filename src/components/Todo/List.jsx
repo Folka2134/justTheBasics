@@ -10,7 +10,7 @@ export const List = () => {
 
   return (
     <div className='grid'>
-      <button onClick={() => clearTodo()} className="hover:bg-[#CF342D] transition-all duration-200 grid justify-center"><RiDeleteBin7Fill size={30} /></button>
+      <button onClick={() => clearTodo()} className="hover:bg-[#CF2B23] transition-all duration-200 grid justify-center"><RiDeleteBin7Fill size={30} color={"hover:bg-[#CF2B23]"} /></button>
       <ul>
         {todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
       </ul>
