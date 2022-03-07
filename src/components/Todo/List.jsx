@@ -10,7 +10,7 @@ export const List = () => {
 
   return (
     <div className='grid justify-center'>
-      <button onClick={() => clearTodo()} className="w-60 hover:bg-[#CF2B23] border-black transition-all duration-200 grid justify-center my-1 p-2">
+      <button onClick={() => clearTodo()} className="grid justify-center w-60 my-1 p-2 hover:bg-[#CF2B23] border-black transition-all duration-200 rounded-lg">
         <RiDeleteBin7Fill size={30} color={"hover:bg-[#CF2B23]"} />
       </button>
       <ul>
