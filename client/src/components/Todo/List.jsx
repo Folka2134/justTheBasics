@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { RiDeleteBin7Fill } from 'react-icons/ri';
 
 import { TodoItem } from "./TodoItem"
@@ -6,7 +6,12 @@ import { TodoItem } from "./TodoItem"
 import { GlobalContext } from './context/GlobalState'
 
 export const List = () => {
-  const { todos, clearTodo } = useContext(GlobalContext)
+  const { todos, clearTodo, getTodos } = useContext(GlobalContext)
+
+  useEffect(() => {
+    getTodos()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className='grid justify-center'>
@@ -14,7 +19,7 @@ export const List = () => {
         <RiDeleteBin7Fill size={30} color={"hover:bg-[#CF2B23]"} />
       </button>
       <ul>
-        {todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
+        {todos.map((todo) => <TodoItem key={todo._id} todo={todo} />)}
       </ul>
     </div>
   )

@@ -14,7 +14,7 @@ export const GlobalProvider = ({ children }) => {
   
   async function getTodos() {
     try {      
-      const res = await axios.get('/')
+      const res = await axios.get('/api/v1/todos')
       dispatch({
         type: "GET_TODOS",
         payload: res.data.data
