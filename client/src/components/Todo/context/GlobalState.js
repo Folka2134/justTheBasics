@@ -33,11 +33,19 @@ export const GlobalProvider = ({ children }) => {
       payload: todo
     })
   }
-  function deleteTodo(id) {
-    dispatch({
-      type: "DELETE_TODO",
-      payload: id
-    })
+  async function deleteTodo(id) {
+    try {
+      await axios.delete(`/api/v1/todos/${id}`)      
+      dispatch({
+        type: "DELETE_TODO",
+        payload: id
+      })
+    } catch (err) {
+      dispatch({
+        type: "TODO_ERROR",
+        payload: err.response.data.error
+      })
+    }
   }
   function clearTodo() {
     dispatch({
