@@ -47,6 +47,24 @@ exports.addTodo = async (req, res, next) => {
 
 // @desc Delete todo
 // @route DELETE /api/v1/todos/:id
-exports.deleteTodo = (req, res, next) => {
-  res.send('DELETE todo')
+exports.deleteTodo = async (req, res, next) => {
+  try {
+    const todo = await Todos.findById(req.params.id)
+    if (!todo) {
+      return res.status(404).json({
+        success: false,
+        error: 'Todo not found'
+      })
+    }
+    await todo.remove()
+    return res.status(200).json({
+      success: true,
+      data: {}
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: 'Server error'
+    })
+  }
 }
