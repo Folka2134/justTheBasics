@@ -25,7 +25,7 @@ exports.addTodo = async (req, res, next) => {
   try {
     const { text } = req.body
     const todo = await Todos.create(req.body)
-    return res.status(200).json({
+    return res.status(201).json({
       success: true,
       data: todo
     })
