@@ -33,7 +33,6 @@ export const GlobalProvider = ({ children }) => {
         'Content-Type': 'application/json'
       }
     }
-    console.log(todo);
     try {
       const res = await axios.post('/api/v1/todos', todo, config)
       dispatch({  
