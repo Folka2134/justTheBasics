@@ -1,8 +1,7 @@
 const express = require('express')
 const dotenv = require('dotenv')
 
-// Bring in todo routes
-const todos = require('./routes/todos')
+const connectDB = require('./config/db')
 
 // Bring in config
 dotenv.config({ path: './config/config.env'})
@@ -11,6 +10,11 @@ dotenv.config({ path: './config/config.env'})
 const app = express()
 const PORT = process.env.PORT
 
+// Connect to database
+connectDB()
+
+// Bring in todo routes
+const todos = require('./routes/todos')
 // use todo routes on this dir
 app.use('/api/v1/todos', todos)
 
