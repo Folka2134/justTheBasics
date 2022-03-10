@@ -60,12 +60,6 @@ export const GlobalProvider = ({ children }) => {
       })
     }
   }
-  function clearTodo() {
-    dispatch({
-      type: "CLEAR_TODO",
-      payload: []
-    })
-  }
 
   return (
     <GlobalContext.Provider
@@ -74,7 +68,6 @@ export const GlobalProvider = ({ children }) => {
         getTodos,
         addTodo,
         deleteTodo,
-        clearTodo
       }}
     >
       {children}

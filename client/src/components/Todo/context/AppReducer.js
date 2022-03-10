@@ -16,11 +16,6 @@ export default (state, action) => {
         ...state,
         todos: state.todos.filter((todo) => todo._id !== action.payload)
       }
-    case "CLEAR_TODO":
-      return {
-        ...state,
-        todos: action.payload
-      }
     case "TODO_ERROR":
       return {
         ...state,
