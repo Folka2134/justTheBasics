@@ -27,11 +27,25 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  function addTodo(todo) {
-    dispatch({
-      type: "ADD_TODO",
-      payload: todo
-    })
+  async function addTodo(todo) {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    console.log(todo);
+    try {
+      const res = await axios.post('/api/v1/todos', todo, config)
+      dispatch({  
+        type: "ADD_TODO",
+        payload: res.data.data
+      })
+    } catch (err) {
+      dispatch({
+        type: "TODO_ERROR",
+        payload: err.response.data.error
+      })
+    }
   }
   async function deleteTodo(id) {
     try {

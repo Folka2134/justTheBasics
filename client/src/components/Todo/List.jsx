@@ -13,6 +13,7 @@ export const List = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  console.log(todos);
   return (
     <div className='grid justify-center'>
       <button onClick={() => clearTodo()} className="grid justify-center w-60 my-1 p-2 hover:bg-[#CF2B23] border-black transition-all duration-200 rounded-lg">
