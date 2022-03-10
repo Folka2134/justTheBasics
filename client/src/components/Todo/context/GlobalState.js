@@ -1,4 +1,5 @@
 import React, { createContext, useReducer} from 'react'
+import axios from "axios"
 
 import AppReducer from './AppReducer'
 
@@ -11,6 +12,21 @@ export const GlobalContext = createContext(initialState)
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState)
   
+  async function getTodos() {
+    try {      
+      const res = await axios.get('/')
+      dispatch({
+        type: "GET_TODOS",
+        payload: res.data.data
+      })
+    } catch (err) {
+      dispatch({
+        type: "TODO_ERROR",
+        payload: err.response.data.error
+      })
+    }
+  }
+
   function addTodo(todo) {
     dispatch({
       type: "ADD_TODO",
@@ -34,6 +50,7 @@ export const GlobalProvider = ({ children }) => {
     <GlobalContext.Provider
       value={{
         todos: state.todos,
+        getTodos,
         addTodo,
         deleteTodo,
         clearTodo
