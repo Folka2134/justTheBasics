@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const TodoSchema = new mongoose.Schema({
-  todo: {
+  text: {
     type: String,
     required: [true, 'Please add text']
   },
