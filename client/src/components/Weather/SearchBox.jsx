@@ -7,7 +7,7 @@ export const SearchBox = () => {
   }
 
   return (
-    <form submit={submit}>
+    <form onSubmit={submit}>
       <input type="text" placeholder='enter city' />
     </form>
   )
