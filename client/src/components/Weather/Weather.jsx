@@ -9,7 +9,7 @@ export const Weather = () => {
         <SearchBox />
         history
       </div>
-      <div className='flex h-full m-8 mt-32 bg-blue-900 bg-opacity-80'>
+      <div className='flex h-full m-8 mt-32 bg-blue-900 bg-opacity-80 rounded-lg'>
         <CardList />
       </div>
     </div >
