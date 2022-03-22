@@ -33,28 +33,68 @@ export const Chat = () => {
   return (
     <div className='h-screen grid bg-indigo-800 justify-center'>
       <div className='h-[56rem] w-96 mt-16 bg-slate-100 self-center'>
-        <header className='h-16 w-full bg-gray-800 text-4xl text-[#759BD1] inline-block p-2'>
+        <header className='h-16 bg-gray-800 text-4xl text-[#759BD1] grid grid-cols-2 p-2'>
           Chat!
-          {/* <SignOut /> */}
+          <SignOut />
         </header>
         <div>
-          <div className='bg-pink-100 h-full'>area</div>
-          {/* user? <ChatRoom /> : <SignIn /> */}
+          {/* <div className='bg-pink-100 h-full'>area</div> */}
+          {user ? <ChatRoom /> : <SignIn />}
+          {/* <ChatRoom /> */}
         </div>
       </div>
     </div>
   )
 }
 
-// function SignIn() {
+function SignIn() {
+  const signInWithGoogle = () => {
+    const provider = new firebase.auth.GoogleAuthProvider()
+    auth.signInWithPopup(provider)
+  }
 
-// }
+  return (
+    <button onClick={signInWithGoogle}>Sign in with Google</button>
+  )
+}
 
-// function SignOut() {
+function SignOut() {
+  return auth.currentUser && (
+    <button onClick={() => auth.signOut()} className='text-2xl text-white hover:text-[#759BD1]'>Sign Out</button>
+  )
+}
 
-// }
+function ChatRoom() {
 
-// function ChatRoom() {
+  const sendMessage = (e) => {
+    e.preventDefault()
+  }
 
-// }
+  return (
+    <>
+      <main>
+        <div>
+          <ChatMessage />
+        </div>
+      </main>
 
+      <form onSubmit={sendMessage}>
+        <input type="text" className='w-full' />
+        <button
+          type='submit'
+          className='w-full'
+        // disabled={!formValue}
+        >+</button>
+      </form>
+    </>
+  )
+}
+
+function ChatMessage(props) {
+  return (
+    <div>
+      <img src='https://api.adorable.io/avatars/23/abott@adorable.png' alt="test" />
+      <p>test text</p>
+    </div>
+  )
+}
