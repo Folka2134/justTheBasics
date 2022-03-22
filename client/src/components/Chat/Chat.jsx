@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import firebase from 'firebase/compat/app'
+
+import '../../index.css'
 
 import 'firebase/compat/firestore'
 import 'firebase/compat/auth'
@@ -34,13 +36,11 @@ export const Chat = () => {
     <div className='h-screen grid bg-indigo-800 justify-center'>
       <div className='h-[56rem] w-96 mt-16 bg-slate-100 self-center'>
         <header className='h-16 bg-gray-800 text-4xl text-[#759BD1] grid grid-cols-2 p-2'>
-          Chat!
+          <h1>Chat!</h1>
           <SignOut />
         </header>
         <div>
-          {/* <div className='bg-pink-100 h-full'>area</div> */}
           {user ? <ChatRoom /> : <SignIn />}
-          {/* <ChatRoom /> */}
         </div>
       </div>
     </div>
@@ -66,24 +66,50 @@ function SignOut() {
 
 function ChatRoom() {
 
-  const sendMessage = (e) => {
+  const dummy = useRef()
+
+  const messagesRef = firestore.collection('messages')
+  const query = messagesRef.orderBy('createdAt').limitToLast(25)
+
+  const [messages] = useCollectionData(query, { idField: 'id' })
+
+
+
+  const [formValue, setFormValue] = useState('')
+
+  const sendMessage = async (e) => {
     e.preventDefault()
+
+    const { uid, photoURL } = auth.currentUser;
+
+    await messagesRef.add({
+      text: formValue,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      uid,
+      photoURL
+    })
+
+    setFormValue('')
+
+    dummy.current.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
     <>
-      <main>
+      <main className='h-[52rem]'>
         <div>
-          <ChatMessage />
+          {messages && messages.map((msg) => <ChatMessage key={msg.text} message={msg} />)}
+
+          <div ref={dummy}></div>
         </div>
       </main>
 
       <form onSubmit={sendMessage}>
-        <input type="text" className='w-full' />
+        <input type="text" value={formValue} onChange={(e) => setFormValue(e.target.value)} className='w-full' />
         <button
           type='submit'
           className='w-full'
-        // disabled={!formValue}
+          disabled={!formValue}
         >+</button>
       </form>
     </>
@@ -91,10 +117,14 @@ function ChatRoom() {
 }
 
 function ChatMessage(props) {
+  const { text, uid, photoURL } = props.message
+
+  const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received'
+
   return (
-    <div>
-      <img src='https://api.adorable.io/avatars/23/abott@adorable.png' alt="test" />
-      <p>test text</p>
+    <div className={`flex align-middle ${messageClass}`}>
+      <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} alt="profile pic" className='h-8 w-10 rounded-lg mx-2 my-5' />
+      <p>{text}</p>
     </div>
   )
 }
