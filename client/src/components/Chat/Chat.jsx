@@ -34,7 +34,7 @@ export const Chat = () => {
 
   return (
     <div className='h-screen grid bg-indigo-800 justify-center'>
-      <div className='h-[56rem] w-96 mt-16 bg-slate-100 self-center'>
+      <div className='h-[500px] w-96 mt-16 bg-slate-100 self-center'>
         <header className='h-16 bg-gray-800 text-4xl text-[#759BD1] grid grid-cols-2 p-2'>
           <h1>Chat!</h1>
           <SignOut />
@@ -96,7 +96,8 @@ function ChatRoom() {
 
   return (
     <>
-      <main className='h-[52rem]'>
+      <main className='h-[500px] bg-white'>
+
         <div>
           {messages && messages.map((msg) => <ChatMessage key={msg.text} message={msg} />)}
 
@@ -105,7 +106,7 @@ function ChatRoom() {
       </main>
 
       <form onSubmit={sendMessage}>
-        <input type="text" value={formValue} onChange={(e) => setFormValue(e.target.value)} className='w-full' />
+        <input type="text" value={formValue} onChange={(e) => setFormValue(e.target.value)} className='w-full bg-slate-200 border-t-2 border-teal-300' />
         <button
           type='submit'
           className='w-full'
