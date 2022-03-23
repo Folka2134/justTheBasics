@@ -97,7 +97,6 @@ function ChatRoom() {
   return (
     <>
       <main className='h-[500px] bg-white'>
-
         <div>
           {messages && messages.map((msg) => <ChatMessage key={msg.text} message={msg} />)}
 
@@ -124,8 +123,8 @@ function ChatMessage(props) {
 
   return (
     <div className={`flex align-middle ${messageClass}`}>
-      <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} alt="profile pic" className='h-8 w-10 rounded-lg mx-2 my-5' />
-      <p>{text}</p>
+      <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} alt="profile pic" className='h-10 rounded-lg mx-1 my-5' />
+      <p className='rounded p-2 my-5'>{text}</p>
     </div>
   )
 }
