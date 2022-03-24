@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 
+import { getDatabase } from 'firebase/database'
+import { set, ref, onValue, remove } from 'firebase/database'
+
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/firestore'
 // import 'firebase/compat/auth'
@@ -22,7 +25,8 @@ firebase.initializeApp({
   measurementId: "G-YXRKT6DWHH"
 })
 
-const firestore = firebase.firestore()
+const app = firebase.firestore()
+const db = getDatabase(app)
 
 export const Todo = () => {
   return (
@@ -37,7 +41,7 @@ export const Todo = () => {
 
 function List() {
 
-  const todosRef = firestore.collection('todos')
+  const todosRef = app.collection('todos')
   const query = todosRef.orderBy('createdAt').limitToLast(25)
   const [todos] = useCollectionData(query, { idField: 'id' })
 
@@ -72,14 +76,21 @@ function List() {
   )
 }
 
+// console.log(firestore.collection('todos').doc(''));
 function TodoItem(props) {
+
+
+  const deleteTodo = async (todo) => {
+    remove(ref(app, `/${todo.id}`))
+
+  }
   return (
     <li className='w-60 p-1 flex justify-between bg-[#CFA904] border-2 border-[#E6D307]'>
       <span>
         {props.todo.text}
       </span>
       <button
-        // onClick={() => deleteTodo(todo._id)} 
+        onClick={() => deleteTodo(props.todo)}
         className="h-8 px-2 bg-[#CEDB07] hover:bg-[#CF2B23] border-black border-2 transition-all duration-200 rounded-3xl">X</button>
     </li>
   )
