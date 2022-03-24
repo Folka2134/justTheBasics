@@ -1,63 +1,82 @@
 import React, { useState } from 'react'
 
-// import { Input } from './Input'
-// import { List } from './List'
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/firestore'
+// import 'firebase/compat/auth'
+// import { useAuthState } from 'react-firebase-hooks/auth'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
+
+firebase.initializeApp({
+  apiKey: "AIzaSyDGseTVycB4ACXhR237e68ZcRP8PG5Bzmw",
+
+  authDomain: "super-chat-8ace6.firebaseapp.com",
+
+  projectId: "super-chat-8ace6",
+
+  storageBucket: "super-chat-8ace6.appspot.com",
+
+  messagingSenderId: "339361691952",
+
+  appId: "1:339361691952:web:3c0dcdd3dfe3ff9ed670f5",
+
+  measurementId: "G-YXRKT6DWHH"
+})
+
+const firestore = firebase.firestore()
 
 export const Todo = () => {
   return (
     <div className='h-screen grid justify-center'>
       <div className='mt-16'>
-        <Input />
+        {/* <Input /> */}
         <List />
       </div>
     </div>
   )
 }
 
-function Input() {
-  const [text, setText] = useState('')
+function List() {
+
+  const todosRef = firestore.collection('todos')
+  const query = todosRef.orderBy('createdAt').limitToLast(25)
+  const [todos] = useCollectionData(query, { idField: 'id' })
+
+  const [formValue, setFormValue] = useState('')
+
 
   const onSubmit = async (e) => {
     e.preventDefault()
 
-    // if (text.length > 1) {
-    //   await todosRef.add({
-    //     id: Math.floor(Math.random() * 1000000),
-    //     text
-    //   })
-    //   e.currentTarget.reset()
-    // }
+    await todosRef.add({
+      text: formValue,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      id: Math.floor(Math.random() * 10000000000),
+    })
 
+    setFormValue('')
   }
 
   return (
-    <form onSubmit={onSubmit} className="border-b-2 border-black p-2">
-      <input type="text" placeholder='new todo' onChange={(e) => setText(e.currentTarget.value)} />
-      <button className='bg-[#0ECF55] p-2'>+</button>
-    </form>
+    <>
+      <form onSubmit={onSubmit} className="border-b-2 border-black p-2">
+        <input type="text" value={formValue} placeholder='new todo' onChange={(e) => setFormValue(e.currentTarget.value)} />
+        <button className='bg-[#0ECF55] p-2' disabled={!formValue}>+</button>
+      </form>
+
+      <div className='grid justify-center'>
+        <ul>
+          {todos && todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
+        </ul>
+      </div>
+    </>
   )
 }
 
-
-function List() {
-  const todos = []
-
+function TodoItem(props) {
   return (
-    <div className='grid justify-center'>
-      <ul>
-        {todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
-      </ul>
-    </div>
-  )
-}
-
-function TodoItem() {
-  return (
-    // <li className='flex justify-between'><span>{todo.todo}</span><button onClick={() => deleteTodo(todo.id)}>x</button></li>
     <li className='w-60 p-1 flex justify-between bg-[#CFA904] border-2 border-[#E6D307]'>
       <span>
-        {/* {todo.text} */}
-        test
+        {props.todo.text}
       </span>
       <button
         // onClick={() => deleteTodo(todo._id)} 
